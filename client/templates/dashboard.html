@@ -1,0 +1,9 @@
+<template name="dashboard">
+   {{#if pullRequestsReady}}
+      {{#each this}}
+          <p>{{> pullRequest}}</p>
+      {{/each}}
+   {{else}}
+      <p>loading</p>
+   {{/if}}
+</template>

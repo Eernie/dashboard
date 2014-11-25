@@ -1,0 +1,10 @@
+<template name="pullRequest">
+    <h3>{{title}}</h3>
+    <div>{{prettifyDate createdDate}}</div>
+    {{#with author}}
+        {{#with user}}
+            <div>{{name}}</div>
+        {{/with}}
+    {{/with}}
+
+</template>
