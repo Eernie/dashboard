@@ -1,0 +1,24 @@
+<template name="config">
+    <div class="container">
+    {{> quickForm collection="Remotes" id="insertConfigurationForm" type="insert"}}
+
+
+    <table class="table">
+        <thead>
+          <th>Username</th>
+          <th>Password</th>
+          <th>Type</th>
+          <th>Actions</th>
+        </thead>
+    {{#each this}}
+        <tr>
+          <td>{{username}}</td>
+          <td>***</td>
+          <td>{{type}}</td>
+          <td><button class="btn btn-danger removeRemote" id="{{_id}}" >&times;</button></td>
+        </tr>
+    {{/each}}
+
+    </table>
+  </div>
+</template>

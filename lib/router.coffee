@@ -8,6 +8,12 @@ Router.map ->
       PullRequests.findError()
     action: ->
       @render()
+  @route "config",
+    onBeforeAction: ->
+      @config = Meteor.subscribe "remotes"
+      @next()
+    data: ->
+      Remotes.find({}).fetch()
   @route "home",
     path: "/"
     action: ->

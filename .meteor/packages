@@ -10,4 +10,8 @@ coffeescript
 standard-app-packages
 iron:router
 rzymek:moment
+aldeed:autoform
+aldeed:collection2
+aldeed:simple-schema
+bootstrap
 
