@@ -1,10 +1,11 @@
 <template name="pullRequest">
-    <h3>{{title}}</h3>
-    <div>{{prettifyDate createdDate}}</div>
+    <h4>{{title}}</h4>
     {{#with author}}
         {{#with user}}
-            <div>{{name}}</div>
+            <div><b>{{name}}</b></div>
+
         {{/with}}
     {{/with}}
+    <div>{{age createdDate}}</div>
 
 </template>

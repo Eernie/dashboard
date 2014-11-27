@@ -1,9 +1,20 @@
 <template name="dashboard">
-   {{#if pullRequestsReady}}
-      {{#each this}}
-          <p>{{> pullRequest}}</p>
-      {{/each}}
-   {{else}}
-      <p>loading</p>
-   {{/if}}
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span8"></div>
+            <div class="span4">
+                <h3>Pull Requests</h3>
+               {{#if pullRequestsReady}}
+                  {{#each pullRequests}}
+                      <div class="well well-small">{{> pullRequest}}</div>
+                  {{/each}}
+               {{else}}
+                   <p>Loading pullRequests...</p>
+               {{/if}}
+            </div>
+        </div>
+
+
+    </div>
+
 </template>

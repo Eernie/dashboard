@@ -1,19 +1,13 @@
 Router.map ->
   @route "dashboard",
     onBeforeAction: ->
-      @pullRequests = Meteor.subscribe "pullrequests"
+      @pullRequest = Meteor.subscribe "pullrequests"
       @next()
-
-    data: ->
-      PullRequests.findError()
-    action: ->
-      @render()
   @route "config",
     onBeforeAction: ->
-      @config = Meteor.subscribe "remotes"
+      @repos = Meteor.subscribe "repositories"
+      @remote = Meteor.subscribe "remotes"
       @next()
-    data: ->
-      Remotes.find({}).fetch()
   @route "home",
     path: "/"
     action: ->

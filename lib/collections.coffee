@@ -1,6 +1,6 @@
 @PullRequests = new Mongo.Collection('pullRequests')
 PullRequests.findError = ->
-  PullRequests.find({createdDate: {$lte: moment().subtract(1, 'days').unix()*1000}}).fetch()
+  PullRequests.find({createdDate: {$lte: moment().subtract(5, 'days').unix()*1000}}).fetch()
 
 @Remotes = new Mongo.Collection('remotes')
 @Remotes.attachSchema new SimpleSchema
@@ -8,6 +8,9 @@ PullRequests.findError = ->
     type: String
   password:
     type: String
+    autoform:
+      type: "password"
+
   url:
     type: String,
     regEx: SimpleSchema.RegEx.Url
@@ -23,6 +26,8 @@ PullRequests.findError = ->
 
 @Repos = new Mongo.Collection('repositories')
 @Repos.attachSchema new SimpleSchema
+  _id:
+    type: String
   name:
     type: String
   slug:
@@ -31,6 +36,3 @@ PullRequests.findError = ->
     type: String
   monitor:
     type: Boolean
-    optional: false
-    autoValue: ->
-      return false

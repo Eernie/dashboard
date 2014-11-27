@@ -1,26 +1,60 @@
 <template name="config">
-    <div class="container">
-    {{> quickForm collection="Remotes" id="insertConfigurationForm" type="insert"}}
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3">
+                <h4>Remotes</h4>
+                {{> quickForm collection="Remotes" id="insertConfigurationForm" type="insert"}}
+            </div>
+            <div class="span4">
+                <h4>Branches</h4>
 
+                <table class="table">
+                    <thead>
+                    <th>Project</th>
+                    <th>Repository</th>
+                    <th>Monitor</th>
+                    </thead>
+                    {{#each repositories}}
+                        <tr>
+                            <td>{{project}}</td>
+                            <td>{{name}}</td>
+                            <td>
+                                {{#if monitor}}
+                                    <input class="monitor" type="checkbox" checked="checked">
+                                {{else}}
+                                    <input class="monitor" type="checkbox">
+                                {{/if}}
+                            </td>
+                        </tr>
+                    {{/each}}
+                </table>
+            </div>
+        </div>
 
-    <table class="table">
-        <thead>
-          <th>Type</th>
-          <th>Username</th>
-          <th>Url</th>
-          <th>RefreshRate</th>
-          <th>Actions</th>
-        </thead>
-    {{#each this}}
-        <tr>
-            <td>{{type}}</td>
-            <td>{{username}}</td>
-            <td>{{url}}</td>
-            <td>{{refreshRate}}</td>
-            <td><button class="btn btn-danger removeRemote" id="{{_id}}" >&times;</button></td>
-        </tr>
-    {{/each}}
-
-    </table>
-  </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <h4>Current remotes</h4>
+                <table class="table">
+                    <thead>
+                    <th>Type</th>
+                    <th>Username</th>
+                    <th>Url</th>
+                    <th>RefreshRate</th>
+                    <th>Actions</th>
+                    </thead>
+                    {{#each remotes}}
+                        <tr>
+                            <td>{{type}}</td>
+                            <td>{{username}}</td>
+                            <td>{{url}}</td>
+                            <td>{{refreshRate}}</td>
+                            <td>
+                                <button class="btn btn-danger removeRemote" id="{{_id}}">&times;</button>
+                            </td>
+                        </tr>
+                    {{/each}}
+                </table>
+            </div>
+        </div>
+    </div>
 </template>
