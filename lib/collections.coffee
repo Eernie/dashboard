@@ -16,13 +16,18 @@ PullRequests.findError = ->
     regEx: SimpleSchema.RegEx.Url
     index: true
     unique: true
-  refreshRate:
+  refreshRateInSeconds:
     type: Number
   type:
     type: String
-    allowedValues: ['STASH']
+    allowedValues: ['STASH','JENKINS']
     index: true
     unique: true
+  lastChecked:
+    type: Date
+    optional: true
+    autoform:
+      type: "hidden"
 
 @Repos = new Mongo.Collection('repositories')
 @Repos.attachSchema new SimpleSchema
@@ -33,6 +38,13 @@ PullRequests.findError = ->
   slug:
     type: String
   project:
+    type: String
+  monitor:
+    type: Boolean
+    
+@Jobs = new Mongo.Collection('jobs')
+@Jobs.attachSchema new SimpleSchema
+  name:
     type: String
   monitor:
     type: Boolean

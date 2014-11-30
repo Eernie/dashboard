@@ -6,3 +6,6 @@ Meteor.publish "repositories", ->
 
 Meteor.publish "remotes", ->
   Remotes.find({})
+
+Meteor.publish "jobs", ->
+  Jobs.find({})

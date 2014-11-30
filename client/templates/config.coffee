@@ -3,6 +3,8 @@ Template.config.helpers
     return Repos.find({}).fetch()
   remotes: ->
     return Remotes.find({}).fetch()
+  jobs: ->
+    return Jobs.find({}).fetch()
 
 
 Template.config.events
@@ -10,6 +12,12 @@ Template.config.events
     id = event.currentTarget.id
     Remotes.remove({_id: id})
 
-  "click .monitor": () ->
+  "click #repos .monitor": () ->
     that = this
     Repos.update that._id, {$set: {monitor: !that.monitor}}
+  
+  "click #jobs .monitor": ->
+    Jobs.update this._id, {$set: {monitor: !this.monitor}}
+  
+  "click #jobsReload": ->
+    Meteor.call('getJobs')

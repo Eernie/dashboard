@@ -4,7 +4,10 @@ class @Stash
     if(remote == null || remote == undefined )
       console.log "There is no user for Stash configured"
       return
-
+    if remote.lastChecked != null && remote.lastChecked != undefined
+      remote.lastChecked.setSeconds(remote.lastChecked.getSeconds() + remote.refreshRateInSeconds)
+      return if remote.lastChecked > new Date()
+    
     repos = Repos.find({}).fetch();
     if(repos.length == 0)
       Stash.fetchRepos()
@@ -28,6 +31,8 @@ class @Stash
     for value in values
       value._id = value.id.toString()
       PullRequests.insert(value)
+    
+    Remotes.update(remote._id, {$set: {lastChecked: new Date()}})
 
   @getPullRequestsForRepo = (remote, repo) ->
     size = 25
@@ -71,6 +76,7 @@ class @Stash
           name: repo.name
           project: project.key
           monitor: false
-
-Meteor.setInterval(Stash.tick, 10000)
+          
+  
+Meteor.setInterval(Stash.tick, 1000)
 Stash.tick()

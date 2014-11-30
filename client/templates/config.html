@@ -5,10 +5,10 @@
                 <h4>Remotes</h4>
                 {{> quickForm collection="Remotes" id="insertConfigurationForm" type="insert"}}
             </div>
-            <div class="span4">
-                <h4>Branches</h4>
+            <div class="span3">
+                <h4>Repositories</h4>
 
-                <table class="table">
+                <table class="table" id="repos">
                     <thead>
                     <th>Project</th>
                     <th>Repository</th>
@@ -17,6 +17,28 @@
                     {{#each repositories}}
                         <tr>
                             <td>{{project}}</td>
+                            <td>{{name}}</td>
+                            <td>
+                                {{#if monitor}}
+                                    <input class="monitor" type="checkbox" checked="checked">
+                                {{else}}
+                                    <input class="monitor" type="checkbox">
+                                {{/if}}
+                            </td>
+                        </tr>
+                    {{/each}}
+                </table>
+            </div>
+            <div class="span3">
+                <h4>Jobs</h4><button id="jobsReload">reload</button>
+
+                <table class="table" id="jobs">
+                    <thead>
+                    <th>Name</th>
+                    <th>Monitor</th>
+                    </thead>
+                    {{#each jobs}}
+                        <tr>
                             <td>{{name}}</td>
                             <td>
                                 {{#if monitor}}
@@ -47,7 +69,7 @@
                             <td>{{type}}</td>
                             <td>{{username}}</td>
                             <td>{{url}}</td>
-                            <td>{{refreshRate}}</td>
+                            <td>{{refreshRateInSeconds}}</td>
                             <td>
                                 <button class="btn btn-danger removeRemote" id="{{_id}}">&times;</button>
                             </td>

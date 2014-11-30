@@ -7,6 +7,7 @@ Router.map ->
     onBeforeAction: ->
       @repos = Meteor.subscribe "repositories"
       @remote = Meteor.subscribe "remotes"
+      @job = Meteor.subscribe "jobs"
       @next()
   @route "home",
     path: "/"
