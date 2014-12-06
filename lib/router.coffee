@@ -2,6 +2,7 @@ Router.map ->
   @route "dashboard",
     onBeforeAction: ->
       @pullRequest = Meteor.subscribe "pullrequests"
+      @build = Meteor.subscribe "builds"
       @next()
   @route "config",
     onBeforeAction: ->

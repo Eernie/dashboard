@@ -1,16 +1,32 @@
 <template name="dashboard">
     <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span8"></div>
-            <div class="span4">
-                <h3>Pull Requests</h3>
-               {{#if pullRequestsReady}}
-                  {{#each pullRequests}}
-                      <div class="well well-small">{{> pullRequest}}</div>
-                  {{/each}}
-               {{else}}
-                   <p>Loading pullRequests...</p>
-               {{/if}}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-warning">
+                    <div class="panel-heading "><h3>Pull Requests</h3></div>
+                    <ul class="list-group">
+                      {{#if pullRequestsReady}}
+                        {{#each pullRequests}}
+                            <li class="list-group-item">{{> pullRequest}}</li>
+                        {{else}}
+                            There are no pull requests old enough
+                        {{/each}}
+                      {{else}}
+                          <p>Loading pullRequests...</p>
+                      {{/if}}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+              {{#if buildsReady}}
+                {{#each builds}}
+                  <div class="col-md-4">{{>build}}</div>
+                {{else}}
+                    No builds are being monitored
+                {{/each}}
+              {{else}}
+                  <p>Loading builds...</p>
+              {{/if}}
             </div>
         </div>
 

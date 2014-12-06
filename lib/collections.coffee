@@ -41,10 +41,14 @@ PullRequests.findError = ->
     type: String
   monitor:
     type: Boolean
-    
+
 @Jobs = new Mongo.Collection('jobs')
 @Jobs.attachSchema new SimpleSchema
   name:
     type: String
+  url:
+    type: String
   monitor:
     type: Boolean
+
+@Builds = new Mongo.Collection('builds')
