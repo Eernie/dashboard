@@ -4,7 +4,7 @@ class @Stash
     if(remote == null || remote == undefined )
       console.log "There is no user for Stash configured"
       return
-    if remote.lastChecked != null && remote.lastChecked != undefined
+    if remote.lastChecked != null || remote.lastChecked != undefined
       remote.lastChecked.setSeconds(remote.lastChecked.getSeconds() + remote.refreshRateInSeconds)
       if remote.lastChecked > new Date()
         return

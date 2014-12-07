@@ -9,6 +9,3 @@ Meteor.publish "remotes", ->
 
 Meteor.publish "jobs", ->
   Jobs.find({})
-
-Meteor.publish "builds", ->
-  Builds.find({})

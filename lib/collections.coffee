@@ -50,5 +50,12 @@ PullRequests.findError = ->
     type: String
   monitor:
     type: Boolean
-
-@Builds = new Mongo.Collection('builds')
+  order:
+    type: Number
+    optional: true
+  style:
+    type: String
+    optional: true
+  percentage:
+    type: Number
+    optional: true

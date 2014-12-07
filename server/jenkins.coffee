@@ -11,22 +11,22 @@ class @Jenkins
     Meteor.call('getJobs') if Jobs.find({}).fetch().length == 0
     return if Jobs.find({}).length == 0
 
+    Remotes.update(remote._id, {$set: {lastChecked: new Date()}})
     for job in Jobs.find({monitor:true}).fetch()
       build = Jenkins.httpGet(job.url+"lastBuild/api/json",remote)
-      build._id = job.name
       switch build.result
         when "SUCCESS"
-          build.order = 3
-          build.style = "success"
+          order = 3
+          style = "success"
         when "UNSTABLE"
-          build.order = 2
-          build.style = "warning"
+          order = 2
+          style = "warning"
         when "FAILURE"
-          build.order = 1
-          build.style = "danger"
-      build.percentage = (build.duration / build.estimatedDuration) *100
-      Builds.update(job.name, build, {upsert:true})
-
+          order = 1
+          style = "danger"
+      duration = Date.now() - build.timestamp
+      percentage = if build.building then parseInt((duration / build.estimatedDuration) * 100) else 100
+      Jobs.update(job._id, {$set:{order: order, style: style, percentage: percentage}})
 
   @httpGet: (url,remote)->
     auth = remote.username + ":" + remote.password

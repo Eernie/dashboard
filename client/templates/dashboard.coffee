@@ -5,7 +5,7 @@ Template.dashboard.helpers {
   pullRequests: ->
     return PullRequests.findError()
   buildsReady: ->
-    return Router.current().build.ready()
+    return Router.current().job.ready()
   builds: ->
-    return Builds.find({}, {sort: {order: 1, _id: 1}}).fetch()
+    return Jobs.find({monitor:true}, {sort: {order: 1, _id: 1}}).fetch()
 }
