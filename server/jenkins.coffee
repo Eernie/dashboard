@@ -13,7 +13,7 @@ class @Jenkins
 
     Remotes.update(remote._id, {$set: {lastChecked: new Date()}})
     for job in Jobs.find({monitor:true}).fetch()
-      build = Jenkins.httpGet(job.url+"lastBuild/api/json",remote)
+      build = Jenkins.httpGet(job.url+"/lastBuild/api/json",remote)
       switch build.result
         when "SUCCESS"
           order = 3
@@ -48,7 +48,7 @@ Meteor.methods
       Jobs.insert
         _id: job.name
         name: job.name
-        url: job.url
+        url: remote.url + "/job/" + job.name
         monitor: false
 
 Meteor.setInterval Jenkins.tick, 1000

@@ -13,7 +13,6 @@ PullRequests.findError = ->
 
   url:
     type: String,
-    regEx: SimpleSchema.RegEx.Url
     index: true
     unique: true
   refreshRateInSeconds:
