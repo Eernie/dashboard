@@ -4,7 +4,7 @@ class @Stash
     if(remote == null || remote == undefined )
       console.log "There is no user for Stash configured"
       return
-    if remote.lastChecked != null || remote.lastChecked != undefined
+    if remote.lastChecked != null && remote.lastChecked != undefined
       remote.lastChecked.setSeconds(remote.lastChecked.getSeconds() + remote.refreshRateInSeconds)
       if remote.lastChecked > new Date()
         return
@@ -29,10 +29,9 @@ class @Stash
     for repo in repos
       values = values.concat Stash.getPullRequestsForRepo(remote, repo)
 
-    PullRequests.remove({})
     for value in values
       value._id = value.id.toString()
-      PullRequests.insert(value)
+      PullRequests.update(value._id, value, {upsert:true})
 
     Remotes.update(remote._id, {$set: {lastChecked: new Date()}})
 
@@ -43,7 +42,7 @@ class @Stash
     values = []
     content = null
     while(notDone)
-      url = remote.url + "/projects/" + repo.project + "/repos/" + repo.slug + "/pull-requests?state=OPEN&order=OLDEST&limit=" + size
+      url = remote.url + "/projects/" + repo.project + "/repos/" + repo.slug + "/pull-requests?&order=OLDEST&limit=" + size
       if(content != null && loops > 0)
         url = url + "&start=" + content.nextPageStart
 

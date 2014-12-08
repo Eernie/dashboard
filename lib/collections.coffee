@@ -1,6 +1,6 @@
 @PullRequests = new Mongo.Collection('pullRequests')
 PullRequests.findError = ->
-  PullRequests.find({createdDate: {$lte: moment().subtract(5, 'days').unix()*1000}}).fetch()
+  PullRequests.find({open: true,createdDate: {$lte: moment().subtract(5, 'days').unix()*1000}}).fetch()
 
 @Remotes = new Mongo.Collection('remotes')
 @Remotes.attachSchema new SimpleSchema
