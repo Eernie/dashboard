@@ -6,8 +6,8 @@
     </style>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4">
-                <div class="panel panel-danger">
+            <div class="col-md-6">
+                <div class="panel panel-{{overallStatus}}">
                     <div class="panel-heading "><h3>Pull Requests</h3></div>
                     <ul class="list-group">
                       {{#if pullRequestsReady}}
@@ -22,10 +22,10 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-6">
               {{#if buildsReady}}
                 {{#each builds}}
-                  <div class="col-md-4">{{>build}}</div>
+                  <div class="col-md-6">{{>build}}</div>
                 {{else}}
                     No builds are being monitored
                 {{/each}}

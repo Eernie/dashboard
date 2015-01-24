@@ -29,6 +29,7 @@ class @Stash
     for repo in repos
       values = values.concat Stash.getPullRequestsForRepo(remote, repo)
 
+    PullRequests.remove({})
     for value in values
       value._id = value.id.toString()
       PullRequests.update(value._id, value, {upsert:true})

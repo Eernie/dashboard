@@ -42,6 +42,8 @@ PullRequests.findError = ->
     type: Boolean
 
 @Jobs = new Mongo.Collection('jobs')
+@Jobs.findError = ->
+  return Jobs.find({monitor:true, order:1}, {sort: {order: 1, _id: 1}}).fetch()
 @Jobs.attachSchema new SimpleSchema
   name:
     type: String

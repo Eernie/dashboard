@@ -7,5 +7,14 @@ Template.dashboard.helpers {
   buildsReady: ->
     return Router.current().job.ready()
   builds: ->
-    return Jobs.find({monitor:true}, {sort: {order: 1, _id: 1}}).fetch()
+    return Jobs.findError()
+  overallStatus: ->
+    amountFailedJobs = Jobs.findError().length
+    amountPullRequests = PullRequests.findError().length
+    if(amountFailedJobs > 0 || amountPullRequests > 4)
+      return "danger"
+    else if(amountPullRequests >= 2)
+      return "warning"
+    else
+      return "success"
 }

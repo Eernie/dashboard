@@ -4,7 +4,6 @@
 # but you can also edit it by hand.
 
 insecure
-less
 http
 coffeescript
 standard-app-packages
@@ -14,5 +13,6 @@ aldeed:autoform
 aldeed:collection2
 aldeed:simple-schema
 vsivsi:job-collection
-mizzao:bootstrap-3
+nemo64:bootstrap
+less
 
